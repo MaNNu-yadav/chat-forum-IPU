@@ -41,15 +41,15 @@ app.get("/sign-up", (req,res)=>{
 
 app.post("/", async(req,res)=>{
     try {
-        let username = req.body.usernameLogin
-        let password = req.body.passwordLogin
+        const username = req.body.usernameLogin
+        const password = req.body.passwordLogin
         const user = await User.findOne({username});
         const passwordValid = await bcrypt.compare(password, user.password);
         if (!user || !passwordValid) {
             return("invalid user name or  password");
 
         }else{
-            res.redirect("/home.ejs");
+            res.render("/home.ejs");
         }
 
 
@@ -71,7 +71,8 @@ app.post("/sign-up", async(req,res)=>{
         await newUser.save();
         res.redirect("/");
     } catch (error) {
-        res.redirect("//sign-up");
+        console.log(error);
+        res.redirect("/sign-up");
         
     }
 
