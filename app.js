@@ -39,33 +39,13 @@ app.get("/sign-up", (req,res)=>{
     res.render("signup.ejs");
 });
 
-app.post("/", async(req,res)=>{
-    try {
-        const username = req.body.usernameLogin
-        const password = req.body.passwordLogin
-        const user = await User.findOne({username});
-        const passwordValid = await bcrypt.compare(password, user.password);
-        if (!user || !passwordValid) {
-            return("invalid user name or  password");
 
-        }else{
-            res.render("/home.ejs");
-        }
-
-
-        
-    } catch (error) {
-        console.log(error);
-        
-    }
-
-});
 
 app.post("/sign-up", async(req,res)=>{
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const newUser = new User({
-            userName: req.body.username,
+            username: req.body.username,
             password: hashedPassword
         });   
         await newUser.save();
@@ -75,6 +55,29 @@ app.post("/sign-up", async(req,res)=>{
         res.redirect("/sign-up");
         
     }
+
+});
+
+
+app.post("/", async(req,res)=>{
+    try {
+        const { usernameLogin, passwordLogin } = req.body;
+        const user = await User.findOne({ username:usernameLogin });
+        if (!user) {
+          return res.status(404).send('User not found');
+        }
+    
+        const isPasswordValid = await bcrypt.compare(passwordLogin, user.password);
+    
+        if (!isPasswordValid) {
+          return res.status(401).send('Invalid password');
+        }
+    
+        res.render("home.ejs");
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('An error occurred during login');
+      }
 
 });
 
