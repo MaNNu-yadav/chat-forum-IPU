@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import bcrypt from "bcrypt";
 
 
@@ -23,13 +23,33 @@ db.on('error', (error) => {
 });
 
 /* creating a schema under mongoDB */
+/* 1 user id schema*/
 const userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true },
     password: { type: String, required: true }
 });
+
+/*2 question schema */
+const questionSchema = new mongoose.Schema({
+  title: String,
+  content: String,
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }]
+});
+/*3 Answer schema*/
+const answerSchema = new mongoose.Schema({
+  content: String,
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  questionId: { type: mongoose.Schema.Types.ObjectId, ref: 'Question' },
+  likes: { type: Number, default: 0 },
+  dislikes: { type: Number, default: 0 }
+  
+})
 /*creating a model  */
 
 const User = mongoose.model('User', userSchema);
+const Question = mongoose.model('Question', questionSchema);
+const Answer = mongoose.model('Answer', answerSchema);
 
 /* server page */
 app.get("/", (req,res)=>{
@@ -38,6 +58,18 @@ app.get("/", (req,res)=>{
 app.get("/sign-up", (req,res)=>{
     res.render("signup.ejs");
 });
+app.get("/question", (req,res)=>{
+  res.render("question.ejs");
+});
+app.get("/dashboard",async (req,res)=>{
+  try {
+    const questions = await Question.find(); 
+    res.render('home.ejs', { questions }); 
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch questions' });
+  }
+});
+
 
 
 
@@ -73,12 +105,53 @@ app.post("/", async(req,res)=>{
           return res.status(401).send('Invalid password');
         }
     
-        res.render("home.ejs");
+        res.redirect("/dashboard");
       } catch (error) {
         console.error(error);
         res.status(500).send('An error occurred during login');
       }
 
+});
+
+app.post('/question', async (req, res) => {
+  const { title, content } = req.body;
+  const userId = req.userId;
+  try {
+    const newQuestion = new Question({
+      title,
+      content,
+      userId: userId,
+    });
+    await newQuestion.save();  
+    res.redirect("/dashboard");
+    
+
+    
+
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add question' });
+    console.log(error);
+  }
+});
+
+app.post('/:questionId/answer', async (req, res) => {
+  const { content } = req.body;
+  const { questionId } = req.params;
+  try {
+    const answer = await Answer.create({
+      content,
+      userId: req.userId,
+      questionId,
+    });
+
+    await Question.findByIdAndUpdate(questionId, {
+      $push: { answers: answer._id },
+    });
+
+    res.status(201).json({ message: 'Answer added successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add answer' });
+  }
 });
 
 
