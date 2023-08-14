@@ -69,6 +69,10 @@ app.get("/dashboard",async (req,res)=>{
     res.status(500).json({ error: 'Failed to fetch questions' });
   }
 });
+app.get('/:questionId/answer', (req,res)=>{
+  const { questionId } = req.params;
+  res.render('answer.ejs',{questionId});
+});
 
 
 
@@ -136,19 +140,20 @@ app.post('/question', async (req, res) => {
 
 app.post('/:questionId/answer', async (req, res) => {
   const { content } = req.body;
-  const { questionId } = req.params;
+  const user = req.session.user;
+  const questionId = req.params.questionId;
+  const question = await Question.findById(questionId);
   try {
-    const answer = await Answer.create({
+    const answer = new Answer({
       content,
-      userId: req.userId,
+      userId: req.user._id,
       questionId,
     });
+    await answer.save();
+    question.answers.push(answer);
+    await question.save();
 
-    await Question.findByIdAndUpdate(questionId, {
-      $push: { answers: answer._id },
-    });
-
-    res.status(201).json({ message: 'Answer added successfully' });
+    res.status(201).send('Answer added successfully.');
   } catch (error) {
     res.status(500).json({ error: 'Failed to add answer' });
   }
