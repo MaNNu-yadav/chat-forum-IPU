@@ -7,14 +7,14 @@
 </head>
 <body>
     <h1>welcome</h1>
-    <p>post question?</p><a href="/question">click here</a>
+    <p>post question?</p><a href="/question">click here</a><br>
+    <a href="/">logout</a>
     <h1>Dashboard</h1>
     <ul>
         <% questions.forEach(question => { %>
           <li>
             <h2><%= question.title %></h2>
             <p><%= question.content %></p>
-            <a href="/:questionId/answer">Reply</a>
           </li>
         <% }); %>
       </ul>

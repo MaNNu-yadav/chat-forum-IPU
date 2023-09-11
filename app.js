@@ -26,7 +26,8 @@ db.on('error', (error) => {
 /* 1 user id schema*/
 const userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    nameUser: { type: String, required: true },
 });
 
 /*2 question schema */
@@ -82,7 +83,8 @@ app.post("/sign-up", async(req,res)=>{
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const newUser = new User({
             username: req.body.username,
-            password: hashedPassword
+            password: hashedPassword,
+            nameUser: req.body.nameUser,
         });   
         await newUser.save();
         res.redirect("/");
@@ -129,35 +131,31 @@ app.post('/question', async (req, res) => {
     await newQuestion.save();  
     res.redirect("/dashboard");
     
-
-    
-
   } catch (error) {
     res.status(500).json({ error: 'Failed to add question' });
     console.log(error);
   }
 });
 
-app.post('/:questionId/answer', async (req, res) => {
-  const { content } = req.body;
-  const user = req.session.user;
-  const questionId = req.params.questionId;
-  const question = await Question.findById(questionId);
-  try {
-    const answer = new Answer({
-      content,
-      userId: req.user._id,
-      questionId,
-    });
-    await answer.save();
-    question.answers.push(answer);
-    await question.save();
+// app.post('/:questionId/answer', async (req, res) => {
+//   const { content } = req.body;
+//   const { questionId } = req.params;
+//   const question = await Question.findById(questionId);
+//   try {
+//     const answer = new Answer({
+//       content,
+//       userId: req.userId,
+//       questionId,
+//     });
+//     await answer.save();
+    
 
-    res.status(201).send('Answer added successfully.');
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to add answer' });
-  }
-});
+
+//     res.status(201).send('Answer added successfully.');
+//   } catch (error) {
+//     res.status(500).json({ error: 'Failed to add answer' });
+//   }
+// });
 
 
 
