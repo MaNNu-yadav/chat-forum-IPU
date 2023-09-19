@@ -70,10 +70,12 @@ app.get("/dashboard",async (req,res)=>{
     res.status(500).json({ error: 'Failed to fetch questions' });
   }
 });
-app.get('/:questionId/answer', (req,res)=>{
-  const { questionId } = req.params;
-  res.render('answer.ejs',{questionId});
-});
+
+// app.get('/:questionId/answer', (req,res)=>{
+//   const { questionId } = req.params;
+//   res.render('answer.ejs',{questionId});
+// });
+
 
 
 
@@ -137,25 +139,28 @@ app.post('/question', async (req, res) => {
   }
 });
 
-// app.post('/:questionId/answer', async (req, res) => {
-//   const { content } = req.body;
-//   const { questionId } = req.params;
-//   const question = await Question.findById(questionId);
-//   try {
-//     const answer = new Answer({
-//       content,
-//       userId: req.userId,
-//       questionId,
-//     });
-//     await answer.save();
+/*REPLY  */
+app.post('/dashboard', async (req, res) => {
+  const { content } = req.body;
+  const { questionId } = req.params;
+  const question = await Question.findById(questionId);
+  try {
+    const answer = new Answer({
+      content,
+      userId: req.userId,
+      questionId,
+    });
+    await answer.save();
     
 
 
-//     res.status(201).send('Answer added successfully.');
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to add answer' });
-//   }
-// });
+    res.status(201).send('Reply added successfully.');
+    console.log(req.body.content, question._id);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add answer' });
+  }
+});
+
 
 
 

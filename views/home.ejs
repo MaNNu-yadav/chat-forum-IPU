@@ -3,22 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>home</title>
 </head>
 <body>
-    <h1>welcome</h1>
-    <p>post question?</p><a href="/question">click here</a><br>
-    <a href="/">logout</a>
-    <h1>Dashboard</h1>
-    <ul>
-        <% questions.forEach(question => { %>
-          <li>
-            <h2><%= question.title %></h2>
-            <p><%= question.content %></p>
-          </li>
-        <% }); %>
-      </ul>
+  <%- include("partials/header.ejs") %>
+
+
   
-    
+  
+  
+
+
+
+<div class="post-container">
+  <%- include("partials/header.ejs") %>
+  
+
+
+  <ul class="homeul">
+      <% questions.forEach(question => { %>
+        <li class="homelist">
+          <h2 class="title"><%= question.title %></h2>
+          <p><%= question.content %></p>
+          <div class="reply-container">
+              <h3>Reply Section</h3>
+              <form id="reply-form" action='/dashboard' method="post">
+                  <label for="reply-text">Your Reply:</label><br>
+                  <textarea id="reply-text" name="content" rows="4" cols="50"></textarea><br>
+                  <button type="submit">Submit Reply</button>
+              </form>
+          </div>
+          
+        </li>
+      <% }); %>
+    </ul>
+
+  
+
+<script src="app.js"></script>
+
 </body>
 </html>

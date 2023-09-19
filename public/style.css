@@ -1,45 +1,206 @@
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #007FFF;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-    }
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: Arial, sans-serif;
+    background-color: #ffff;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-transform: capitalize;
+    
+}
 
-    .container {
-        background-color: #fff;
-        padding: 45px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        text-align: center;
-    }
+.container {
+    background-color: #fff;
+    padding: 45px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 15rem;
+    
+}
 
-    .logo {
-        width: 100px;
-        /* Adjust the width as needed */
-        height: auto;
-        margin: 0 auto 20px;
-        /* Center the logo */
-    }
+.logo {
+    width: 10rem;
+    height: auto;
+    margin: 0 auto 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 80px;
+}
 
-    input[type="text"],
-    input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        margin: 8px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+img{
+    width: 100px;
+    height: auto;
+    margin: 0px 1360px -51px 0px;
 
-    input[type="submit"] {
-        background-color: #007BFF;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"] {
+background-color: #007BFF;
+color: #fff;
+border: none;
+padding: 10px 20px;
+cursor: pointer;
+}
+
+
+.navbar {
+background-color: #041d54;
+display: flex;
+justify-content: flex-end;
+align-items: center;
+padding: 10px 20px;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+margin-bottom: 3.5rem;
+height: 7.5rem;
+}
+
+/* Logo styles */
+.logo {
+display: block;
+margin-top: 10px;
+margin-left: 80px;
+}
+
+/* Heading styles */
+.heading {
+color: white;
+text-align: center;
+margin: 0;
+flex-grow: 1;
+margin-left: 5rem;
+}
+
+/* UL (unordered list) styles */
+.content {
+
+list-style-type: none;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: space-evenly;
+font-size: larger;
+padding: 10px 20px;
+margin-right: 40px;
+width: fit-content;
+font-weight: bold;
+}
+
+/* List item (li) styles */
+.content li {
+margin-right: 10px;
+
+}
+
+/* Anchor (a) styles */
+.content li a {
+color: white;
+text-decoration: none;
+margin-right: 1.5rem;
+}
+
+/* Hover effect for anchors */
+.content li a:hover {
+text-decoration: underline;
+}
+
+/* Submission container */
+.submission {
+text-align: center;
+margin-top: 20px;
+}
+
+/* Input container */
+.input-container {
+display: inline-block;
+position: relative;
+}
+
+/* Input styles */
+#content {
+padding: 50px 50px;
+/* Adjust the padding to make the input box bigger */
+width: 100%;
+}
+
+/* Button styles */
+#post-button {
+position: relative;
+top: 0;
+right: 0;
+padding: 10px 20px;
+}
+
+.post-container{
+    width: 60%;
+    margin-top: 5rem ;
+    padding-bottom: 10rem;
+    background-color: #fff;
+    padding: 45px;
+    border-radius: 10px;
+    text-align: center;
+    margin-left: 20rem;
+    padding-left: 0px;
+    padding-top: 10px;
+    padding-right: 0px;
+    padding-bottom: 10px;
+    
+    
+}
+.loginheading{
+color: white;
+text-align: center;
+margin: 0;
+flex-grow: 1;
+
+}
+.homelist{
+display: flex;
+align-items: baseline;
+border-bottom: 3px solid black;
+flex-direction: column;
+padding: 50px 25px 25px;
+padding-top: 25px;
+padding-left: 50px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+border-radius: 10px;
+margin-bottom: 5rem;
+
+}
+.homeul{
+    padding-left: 0px;
+}
+.reply-container{
+display: flex;
+align-items: baseline;
+flex-direction: column;
+padding-left: 5rem;
+
+
+}

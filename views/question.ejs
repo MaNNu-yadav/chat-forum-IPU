@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Post Question</title>
 </head>
 <body>
+    <%- include("partials/header.ejs") %>
     <h1>Post a Question</h1>
-  <form action="/question" method="post">
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="title" required><br><br>
+  <div class="submission">
+    <div class="input-container">
+        <form action="/question" method="post">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br><br>
+            
+            <label for="content">Content:</label><br>
+            <textarea id="content" name="content" rows="4" cols="50" required></textarea><br><br>
+        <button id="post-button" type="submit" >Post Your Submission</button>
+    </div>
+</div>
     
-    <label for="content">Content:</label><br>
-    <textarea id="content" name="content" rows="4" cols="50" required></textarea><br><br>
-    
-    <button type="submit">post Question</button>
+
   </form>
   
     

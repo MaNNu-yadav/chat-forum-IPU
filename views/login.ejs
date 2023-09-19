@@ -7,6 +7,32 @@
     <title>login</title>
 </head>
 <body>
+    <main>
+        <header>
+          <div class="navbar">
+              <img src="headerlogo.png" alt="GGSIPU" class="logo">
+              <h1 class="loginheading">IPU Forum</h1>
+              <ul class="content">
+                  <li><div id="searchBox">
+                    <div>
+                      <form id="cse-search-box">
+                        <input type="text" class="tftextinput2" size="20" maxlength="20" placeholder="Search links" onkeyup="showResult(this.value)">
+          
+                      </form>
+                      <div id="wrapper" class="force-overflow" style="display:none">
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+  
+            </div>
+            
+          </header>
+    
+        </main>
+
+
     <div class="container">
         <img class="logo" src="logo.png" alt="IPU Forum Logo">
         <h1>IPU Forum</h1>
@@ -15,7 +41,7 @@
             <label for="usernameLogin">username:</label>
             <input type="text" name="usernameLogin" id="username" required><br>
             <label for="passwordLogin">Password</label>
-            <input type="text" name="passwordLogin" id="password" required><br>
+            <input type="password" name="passwordLogin" id="password" required><br>
             <button type="submit">login</button>
         </form>
         <p>Don't have account?</p><a href="/sign-up">sign-up</a>
