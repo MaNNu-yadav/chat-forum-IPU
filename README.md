@@ -1,0 +1,2 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!IPU Chat Forum!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Welcome to the IPU Chat Forum! This is a simple web application where users can engage in discussions by posting their thoughts and queries. Users can log in if they are already registered, or sign up if they are new to the platform. User data is securely stored in a MongoDB database, with passwords encrypted using hashing for enhanced security.
